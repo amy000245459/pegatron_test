@@ -17,9 +17,15 @@
             </td>
             <td> 
             
-            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Edit
-        </button> 
+            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#{{ this.name }}">
+            Edit
+            </button> 
+            <div class="modal fade" id="{{ this.name }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <form action="./users/{{ this._id }}?_method=PUT" method="POST" style="display: inline;">
+                {{>modal-body}}
+            </div>
             <form action="./users/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
                 <button class="btn btn-light" type="submit">delete</button>
             </form>
@@ -30,12 +36,15 @@
         </table>
     </div>
     <div class="col-4">
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">
         Add New User
         </button>
-        {{>modal}}
-
-
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <form action="/users" method="POST" style="display: inline;">
+            {{>modal-body}}
+        </div>
     </div>
 </div>
 </div>

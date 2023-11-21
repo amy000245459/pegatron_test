@@ -20,10 +20,16 @@ userController = {
         .then(() => res.redirect('/users') )
         .catch(err =>  next(err))
     },
+    updateUser: (req, res, next) => {
+        const _id = req.params.id
+        const { name, age } = req.body
+        return  User.findOneAndUpdate({ _id }, {name, age})
+          .then(() => res.redirect('/'))
+          .catch(error => next(error))
+    },
     deleteUser: (req, res, next) => {
         const _id = req.params.id
-        return  User.findOne({ _id })
-          .then(user => user.remove())
+        return  User.findOneAndRemove({ _id })
           .then(() => res.redirect('/'))
           .catch(error => next(error))
       }
