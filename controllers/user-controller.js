@@ -19,7 +19,14 @@ userController = {
         })
         .then(() => res.redirect('/users') )
         .catch(err =>  next(err))
-    }
+    },
+    deleteUser: (req, res, next) => {
+        const _id = req.params.id
+        return  User.findOne({ _id })
+          .then(user => user.remove())
+          .then(() => res.redirect('/'))
+          .catch(error => next(error))
+      }
 }
 
 module.exports = userController

@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form action="/users" method="POST" style="display: inline;">
+        <div class="modal-body">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="name">Name</label>
+                <div class="col-sm-10">
+                <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" value="{{this.name}}" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="age">Age</label>
+                <div class="col-sm-10">
+                <input class="form-control" type="number" name="age" id="age" placeholder="Enter age" value="{{this.amount}}" required>
+                </div>
+            </div>  
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </form>
+    </div>
+</div>
+</div>
