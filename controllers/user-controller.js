@@ -17,7 +17,10 @@ userController = {
             name: name,
             age: age
         })
-        .then(() => res.redirect('/users') )
+        .then(user => {
+            req.flash('success_msg', `${name} - ${age} has been added`)
+            return res.redirect('/users')
+         } )
         .catch(err =>  next(err))
     },
     updateUser: (req, res, next) => {
@@ -29,8 +32,13 @@ userController = {
     },
     deleteUser: (req, res, next) => {
         const _id = req.params.id
-        return  User.findOneAndRemove({ _id })
-          .then(() => res.redirect('/'))
+        return  User.findOne({ _id })
+          .then(user => {
+            const name = user.name
+            user.remove()
+            req.flash('success_msg', `${name} has been removed`)
+            res.redirect('/users')
+            })
           .catch(error => next(error))
       }
 }
