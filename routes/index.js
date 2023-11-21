@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req, res) => res.send('meow'))
-router.use('/', (req, res) => res.redirect('/records'))
+router.get('/users', (req, res) => res.send('meow'))
+router.use('/', (req, res) => res.redirect('/users'))
 
 module.exports = router
