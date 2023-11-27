@@ -1,5 +1,6 @@
 const User = require('../models/user')
 
+
 userController = {
     getUsers: (req, res, next) => {
         User.find()
@@ -40,7 +41,24 @@ userController = {
             res.redirect('/users')
             })
           .catch(error => next(error))
-      }
+      },
+      downloadUsers: (req, res, next) => {
+        User.find().select('name age')
+        .lean()
+        .sort({ name: 'asc' }) // desc
+        .then(users => {
+            //data = users.map(({_id, ...rest}) => rest)
+            let data_csv = ''
+            for ( row of users) {
+                data_csv += `${row.name},${row.age}\r\n`
+            }
+            res.attachment('user_list.csv')
+            //req.flash('success_msg', `User list has been downloaded`)
+            //res.redirect('/users')
+            res.send(data_csv)
+        })
+        .catch(err =>  next(err))
+      },
 }
 
 module.exports = userController
