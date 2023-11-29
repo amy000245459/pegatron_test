@@ -11,23 +11,30 @@
             {{#each users}}
             <tr>
             <td> 
-            {{ this.name }} - {{ this.age }}
+            <div class="container">
+                <div class="row">
+                    {{ this.name }} - {{ this.age }}
+                </div>
+                <div class="row">
+            {{#each this.pictures}}
+            <img class="img-responsive center-block" src="{{this.picture}}" style="width: 85px; height: 85px;  margin-bottom: 10px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
+            {{/each}}
+            </div>
             </td>
             <td> 
-            
             <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#{{ this.name }}">
             Edit
             </button> 
             <div class="modal fade" id="{{ this.name }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                <form action="./users/{{ this._id }}?_method=PUT" method="POST" style="display: inline;">
+                <form action="./users/{{ this._id }}?_method=PUT" method="POST" style="display: inline;" enctype="multipart/form-data">
                 {{>modal-body}}
             </div>
             <form action="./users/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-                <button class="btn btn-light" type="submit">delete</button>
+                <button class="btn btn-light" type="submit">Delete</button>
             </form>
-            </td>  
+            </td> 
             </tr>
             {{/each}}
         </tbody>
@@ -41,12 +48,8 @@
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <form action="/users" method="POST" style="display: inline;">
+            <form action="/users" method="POST" style="display: inline;" enctype="multipart/form-data">
             {{>modal-body}}
-        
-        
-    </div>
+        </div>
     </div>
 </div>
-
-
